@@ -1,0 +1,40 @@
+.sdk-playback {
+  background-color: rgba(255, 255, 255, 0.9);
+  bottom: 0;
+  border-radius: 4px;
+  position: absolute;
+  padding: 7px;
+  max-width: 420px;
+  z-index: 1001;
+  left: 0;
+  right: 0;
+  margin: 0 auto;
+  margin-bottom: 20px;
+  display: flex; }
+  .sdk-playback .playback-col-a {
+    flex: 2;
+    margin: 4px 10px; }
+    .sdk-playback .playback-col-a h3 {
+      margin: 0px; }
+    .sdk-playback .playback-col-a .date {
+      display: flex; }
+      .sdk-playback .playback-col-a .date:nth-child(2) div div div {
+        height: initial !important;
+        font-size: 14px !important; }
+      .sdk-playback .playback-col-a .date i {
+        padding-right: 10px;
+        font-size: 14px !important; }
+      .sdk-playback .playback-col-a .date input {
+        height: auto !important; }
+      .sdk-playback .playback-col-a .date hr {
+        display: none; }
+  .sdk-playback .playback-col-b {
+    flex: 3;
+    display: flex; }
+    .sdk-playback .playback-col-b .slider {
+      flex: 4;
+      height: 52px !important; }
+    .sdk-playback .playback-col-b .playButton {
+      flex: 1;
+      margin-top: 4px;
+      height: 52px !important; }

@@ -1,0 +1,20 @@
+{
+  "routes": [
+    {
+      "path": "/geoserver/*",
+      "upstream": "geoserver"
+    },
+    {
+      "path": "/*",
+      "upstream": "default"
+    }
+  ],
+  "upstreams": {
+    "geoserver": {
+      "port": 8080
+    },
+    "default": {
+      "port": 3000
+    }
+  }
+}
