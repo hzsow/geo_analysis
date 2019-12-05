@@ -3,6 +3,8 @@ import ReactDOM from 'react-dom';
 import ol from 'openlayers';
 import {addLocaleData, IntlProvider, defineMessages, injectIntl, intlShape} from 'react-intl';
 
+import { Resizable, ResizableBox } from 'react-resizable';
+
 import LoadingPanel from '@boundlessgeo/sdk/components/LoadingPanel';
 import MapPanel from '@boundlessgeo/sdk/components/MapPanel';
 import Header from '@boundlessgeo/sdk/components/Header';
@@ -11,7 +13,7 @@ import Zoom from '@boundlessgeo/sdk/components/Zoom';
 import EditPopup from '@boundlessgeo/sdk/components/EditPopup';
 import DrawFeature from '@boundlessgeo/sdk/components/DrawFeature';
 import FeatureTable from '@boundlessgeo/sdk/components/FeatureTable';
-import enLocaleData from 'react-intl/locale-data/ru';
+import enLocaleData from 'react-intl/locale-data/en';
 import enMessages from '@boundlessgeo/sdk/locale/en';
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
 import injectTapEventPlugin from 'react-tap-event-plugin';
@@ -26,9 +28,10 @@ import {dist, tko, tsBuf, dsBuf, mssBuf ,sadi, bolota, mss, nasPunkt, rivers, ro
 import {LayersPanel} from './modules/LayersPanel';
 import {TabAnalysis} from './modules/TabAnalysis';
 import {TabQuery} from './modules/TabQuery';
+import {init} from "./modules/geoserverLog";
 import $ from "jquery";
 
-
+init();
 injectTapEventPlugin();
 
 
@@ -37,7 +40,7 @@ addLocaleData(
 );
 
 
-var map = new ol.Map({
+let map = new ol.Map({
   loadTilesWhileAnimating: true,
   controls: [new ol.control.Attribution({collapsible: false})],
   layers: [
@@ -282,7 +285,7 @@ class WFSTApp extends React.Component {
         </Header>
         <MapPanel id='map' map={map} />
         <div id='editpopup' className='ol-popup'><EditPopup toggleGroup='nav' map={map} /></div>
-        <div ref='tablePanel' id='table-panel' className='attributes-table'><FeatureTable toggleGroup='navigation' ref='table' map={map} /></div>
+        <div  ref='tablePanel' id='table-panel' className='attributes-table'><FeatureTable toggleGroup='navigation' ref='table' map={map} /></div >
         <LoadingPanel map={map} />
         <div id='popup' className='ol-popup'><InfoPopup toggleGroup='navigation' map={map} /></div>
         <div id='legend' style={{display: this.state.isLegendOn ? "block" : "none"}}><img id="leg1" src={this.state.legst}/></div>

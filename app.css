@@ -101,12 +101,12 @@ html, body {
 .attributes-table {
   display: none;
   position: absolute;
-  bottom: 0px;
-  left: 0;
-  height: 50%;
+  bottom: 30px;
+
+  height: 45%;
   width: 100%;
   z-index: 101;
-  background-color: white;
+
 }
 .chart-panel{
   display: none;

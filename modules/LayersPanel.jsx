@@ -1,7 +1,16 @@
 import React from 'react';
 import ol from "openlayers";
 import $ from "jquery";
-import Tooltip from '@material-ui/core/Tooltip';
+import tooltip from "tooltip"
+
+let config  = {
+    showDelay: 0,
+    style: {
+        padding: 5,
+        background: 'white'
+    }
+};
+tooltip(config);
 
 let format = new ol.format.GeoJSON();
 let distsWasteJSON = "";
@@ -868,7 +877,7 @@ export class LayersPanel extends React.Component {
                 <div className="form-check">
                     <label>
                         <input id={"distCh"} type="checkbox" name="isDist" checked={this.state.isDist} onChange={this.toggleLayer(dist, this.state.isDist)}/> <span className="label-text">Районы Республики Башкортостан </span><label
-                        className="filtr" onClick={this.props.onFiltr1Click.bind(null, this)}>Фильтр</label><span> </span><Tooltip title="Add" arrow><label style={{backgroundColor:this.props.isGraphOn ? 'aqua' : 'white', display: this.state.isDist ? "block" : "none"}} className="filtr" onClick={this.props.onGraphClick.bind(null, this)}>Графики отходов</label></Tooltip>
+                        className="filtr" onClick={this.props.onFiltr1Click.bind(null, this)}>Фильтр</label><span> </span><label data-tooltip={"Нажать, выбрать полигон"}  style={{backgroundColor:this.props.isGraphOn ? 'aqua' : 'white', display: this.state.isDist ? "block" : "none"}} className="filtr" onClick={this.props.onGraphClick.bind(null, this)}>Графики отходов</label>
 
                     </label>
                 </div>
