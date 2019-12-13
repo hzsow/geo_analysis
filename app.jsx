@@ -30,6 +30,7 @@ import {TabAnalysis} from './modules/TabAnalysis';
 import {TabQuery} from './modules/TabQuery';
 import {init} from "./modules/geoserverLog";
 import $ from "jquery";
+import {Finder} from "./modules/finder2";
 
 init();
 injectTapEventPlugin();
@@ -275,6 +276,7 @@ class WFSTApp extends React.Component {
     return (
       <div id='content'>
         <Header showLeftIcon={false}>
+          <Finder/>
           <Select toggleGroup='nav' map={map}/>
           <Measure toggleGroup='nav' map={map}/>
           <ImageExport map={map} />
@@ -283,6 +285,27 @@ class WFSTApp extends React.Component {
           <Button toggleGroup='nav' buttonType='Icon' iconClassName='headerIcons ms ms-table' tooltip='Table' onTouchTap={this._toggleTable.bind(this)}/>
 
         </Header>
+
+        <div className="modal fade" id="exampleModalScrollable" tabIndex="-1" role="dialog"
+             aria-labelledby="" aria-hidden="false">
+          <div className="modal-dialog modal-dialog-scrollable" role="document">
+            <div className="modal-content">
+              <div className="modal-header">
+                <h5 className="modal-title" id="exampleModalScrollableTitle">Результаты поиска</h5>
+                <button type="button" className="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div className="modal-body" id={"modal-body"}>
+
+              </div>
+              <div className="modal-footer">
+                <button type="button" className="btn btn-secondary" data-dismiss="modal">Закрыть</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
         <MapPanel id='map' map={map} />
         <div id='editpopup' className='ol-popup'><EditPopup toggleGroup='nav' map={map} /></div>
         <div  ref='tablePanel' id='table-panel' className='attributes-table'><FeatureTable toggleGroup='navigation' ref='table' map={map} /></div >
@@ -291,9 +314,9 @@ class WFSTApp extends React.Component {
         <div id='legend' style={{display: this.state.isLegendOn ? "block" : "none"}}><img id="leg1" src={this.state.legst}/></div>
         <div className="toolbar">
           <div id='zoom-buttons'><Zoom map={map} /></div>
-          <button title={"Вернуть начальный вид"} id="home" className={"buttonOff"} onClick={this._homeClick} style={{background:this.state.bgColor}}><i className="fa fa-home"></i></button>
-          <button title={"Тематические карты"} id="layerTurn2" className={this.state.isTurn2On ? "buttonOn" : "buttonOff"} onClick={this._layerTurn2Click}><i className="fa fa-asterisk"></i></button>
-          <button title={"Легенда"} id="legendTurn" className={this.state.isLegendOn ? "buttonOn" : "buttonOff"} onClick={this._legendTurn}><i className="fa fa-list-alt"></i></button>
+          <button title={"Вернуть начальный вид"} id="home" className={"buttonOff"} onClick={this._homeClick} style={{background:this.state.bgColor}}><i className="fa fa-home"/></button>
+          <button title={"Тематические карты"} id="layerTurn2" className={this.state.isTurn2On ? "buttonOn" : "buttonOff"} onClick={this._layerTurn2Click}><i className="fa fa-asterisk"/></button>
+          <button title={"Легенда"} id="legendTurn" className={this.state.isLegendOn ? "buttonOn" : "buttonOff"} onClick={this._legendTurn}><i className="fa fa-list-alt"/></button>
         </div>
         <div id='layerlist'><LayersPanel isGraphOn={this.state.isGraphOn} onGraphClick = {this.onGraphClick} onFiltr1Click = {(component, event) => this.tabManager(1)} onFiltr2Click = {(component, event) => this.tabManager(2)}  f = {(func) => this.toggleDist = func}  className={"panel"} state={this.state.isLayerPanelOn}/><button id="layerPanelButton" className={this.state.isLayerPanelOn ? "buttonOn" : "buttonOff"} onClick={this._isLayerPanel}><i className="fa fa-plus-square-o"></i></button>
         </div>
@@ -312,3 +335,5 @@ WFSTApp.childContextTypes = {
 ReactDOM.render(<IntlProvider locale='en' messages={enMessages}><WFSTApp /></IntlProvider>, document.getElementById('main'));
 tko.setVisible(false);
 mss.setVisible(false);
+
+export {map}

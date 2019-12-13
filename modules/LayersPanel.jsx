@@ -366,7 +366,7 @@ let mss = new ol.layer.Vector({
     popupInfo: '<b>Организация</b>: [Organizati]<br><b>Адрес</b>: [Address]<br><b>Мощность</b>: [Moshnost]',
     isWFST: true,
     visible: true,
-    title: 'Мусоросортировочные станции',
+    title: 'Мусоросорт-ые станции',
     wfsInfo: {
         featureNS: 'http://www.opengeospatial.net/cite',
         attributes: ['Organizati', 'Address', 'Moshnost'],
