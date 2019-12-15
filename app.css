@@ -335,3 +335,19 @@ html, body {
 .resDiv:hover{
   background: rgb(0, 188, 212);
 }
+
+.panel2{
+  position:absolute;
+  z-index: 5;
+  top: 100px;
+  background: #fff;
+  left: 8%;
+  max-height: 100%;
+  width: 290px;
+  font-size: 12px;
+  text-align: left;
+  opacity: 0.8;
+  overflow: auto;
+  border: 1px solid #ddd;
+  padding: 5px;
+}

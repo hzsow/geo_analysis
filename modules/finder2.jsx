@@ -105,7 +105,6 @@ export class Finder extends React.Component {
         let results = this.searchFor(this.state.input_value);
 
 
-
         for (let i = 0; i < results.length; i++) {
             let div = document.createElement('div');
             div.setAttribute("id", i);

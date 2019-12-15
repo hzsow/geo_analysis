@@ -11,11 +11,12 @@ let config  = {
     }
 };
 tooltip(config);
-
+let Un1, Un2, dtr1, dtr2, dop1, dop2, trop1, trop2, dto1, dto2, d1, d2, d3, d4, tr1, tr2;
 let format = new ol.format.GeoJSON();
 let distsWasteJSON = "";
+
 $.ajax({
-    url: 'http://localhost:3978/dists.json',
+    url: 'http://localhost:3978/data/dists.json',
     dataType: 'json',
     async: false,
     success: function(data) {
@@ -24,7 +25,6 @@ $.ajax({
     complete: function(){
     }
 });
-
 let distWASTEJSONSource = new ol.source.Vector({
     features: format.readFeatures(distsWasteJSON, {
         featureProjection: 'EPSG:4326'
@@ -197,6 +197,466 @@ let trainStationSource = new ol.source.Vector({
     strategy: ol.loadingstrategy.tile(ol.tilegrid.createXYZ({
         maxZoom: 7
     }))
+});
+
+
+$.ajax({
+    url: 'http://localhost:3978/data/DTO1.geojson',
+    dataType: 'json',
+    async: false,
+    success: function(data) {
+        dto1=data;
+    },
+    complete: function(){
+    }
+});
+$.ajax({
+    url: 'http://localhost:3978/data/DTOUn1.geojson',
+    dataType: 'json',
+    async: false,
+    success: function(data) {
+        dto2=data;
+    },
+    complete: function(){
+    }
+});
+let dto111 = new ol.source.Vector({
+    features: format.readFeatures(dto1, {
+        featureProjection: 'EPSG:3857'
+    })
+});
+let dto222 = new ol.source.Vector({
+    features: format.readFeatures(dto2, {
+        featureProjection: 'EPSG:3857'
+    })
+});
+
+$.ajax({
+    url: 'http://localhost:3978/data/TROP1.geojson',
+    dataType: 'json',
+    async: false,
+    success: function(data) {
+        trop1=data;
+    },
+    complete: function(){
+    }
+});
+$.ajax({
+    url: 'http://localhost:3978/data/TROPU1.geojson',
+    dataType: 'json',
+    async: false,
+    success: function(data) {
+        trop2=data;
+    },
+    complete: function(){
+    }
+});
+let trop111 = new ol.source.Vector({
+    features: format.readFeatures(trop1, {
+        featureProjection: 'EPSG:3857'
+    })
+});
+let trop222 = new ol.source.Vector({
+    features: format.readFeatures(trop2, {
+        featureProjection: 'EPSG:3857'
+    })
+});
+
+$.ajax({
+    url: 'http://localhost:3978/data/DOP1.geojson',
+    dataType: 'json',
+    async: false,
+    success: function(data) {
+        dop1=data;
+    },
+    complete: function(){
+    }
+});
+$.ajax({
+    url: 'http://localhost:3978/data/DOPun1.geojson',
+    dataType: 'json',
+    async: false,
+    success: function(data) {
+        dop2=data;
+    },
+    complete: function(){
+    }
+});
+let DOP111 = new ol.source.Vector({
+    features: format.readFeatures(dop1, {
+        featureProjection: 'EPSG:3857'
+    })
+});
+let DOP222 = new ol.source.Vector({
+    features: format.readFeatures(dop2, {
+        featureProjection: 'EPSG:3857'
+    })
+});
+
+$.ajax({
+    url: 'http://localhost:3978/data/DTR1.geojson',
+    dataType: 'json',
+    async: false,
+    success: function(data) {
+        dtr1=data;
+    },
+    complete: function(){
+    }
+});
+$.ajax({
+    url: 'http://localhost:3978/data/DTR2.geojson',
+    dataType: 'json',
+    async: false,
+    success: function(data) {
+        dtr2=data;
+    },
+    complete: function(){
+    }
+});
+let dtr111 = new ol.source.Vector({
+    features: format.readFeatures(dtr1, {
+        featureProjection: 'EPSG:3857'
+    })
+});
+let dtr222 = new ol.source.Vector({
+    features: format.readFeatures(dtr2, {
+        featureProjection: 'EPSG:3857'
+    })
+});
+
+$.ajax({
+    url: 'http://localhost:3978/data/D11.geojson',
+    dataType: 'json',
+    async: false,
+    success: function(data) {
+        d1=data;
+    },
+    complete: function(){
+    }
+});
+$.ajax({
+    url: 'http://localhost:3978/data/D22.geojson',
+    dataType: 'json',
+    async: false,
+    success: function(data) {
+        d2=data;
+    },
+    complete: function(){
+    }
+});
+$.ajax({
+    url: 'http://localhost:3978/data/D33.geojson',
+    dataType: 'json',
+    async: false,
+    success: function(data) {
+        d3=data;
+    },
+    complete: function(){
+    }
+});
+$.ajax({
+    url: 'http://localhost:3978/data/D44.geojson',
+    dataType: 'json',
+    async: false,
+    success: function(data) {
+        d4=data;
+    },
+    complete: function(){
+    }
+});
+let D111 = new ol.source.Vector({
+    features: format.readFeatures(d1, {
+        featureProjection: 'EPSG:3857'
+    })
+});
+let D222 = new ol.source.Vector({
+    features: format.readFeatures(d2, {
+        featureProjection: 'EPSG:3857'
+    })
+});
+let D333 = new ol.source.Vector({
+    features: format.readFeatures(d3, {
+        featureProjection: 'EPSG:3857'
+    })
+});
+let D444 = new ol.source.Vector({
+    features: format.readFeatures(d4, {
+        featureProjection: 'EPSG:3857'
+    })
+});
+
+$.ajax({
+    url: 'http://localhost:3978/data/TR1.geojson',
+    dataType: 'json',
+    async: false,
+    success: function(data) {
+        tr1=data;
+    },
+    complete: function(){
+    }
+});
+$.ajax({
+    url: 'http://localhost:3978/data/Buf1.geojson',
+    dataType: 'json',
+    async: false,
+    success: function(data) {
+        tr2=data;
+    },
+    complete: function(){
+    }
+});
+let TR111 = new ol.source.Vector({
+    features: format.readFeatures(tr1, {
+        featureProjection: 'EPSG:3857'
+    })
+});
+let TR222 = new ol.source.Vector({
+    features: format.readFeatures(tr2, {
+        featureProjection: 'EPSG:3857'
+    })
+});
+
+$.ajax({
+    url: 'http://localhost:3978/data/U1.geojson',
+    dataType: 'json',
+    async: false,
+    success: function(data) {
+        Un1=data;
+    },
+    complete: function(){
+    }
+});
+$.ajax({
+    url: 'http://localhost:3978/data/U2.geojson',
+    dataType: 'json',
+    async: false,
+    success: function(data) {
+        Un2=data;
+    },
+    complete: function(){
+    }
+});
+let U1 = new ol.source.Vector({
+    features: format.readFeatures(Un1, {
+        featureProjection: 'EPSG:3857'
+    })
+});
+let U2 = new ol.source.Vector({
+    features: format.readFeatures(Un2, {
+        featureProjection: 'EPSG:3857'
+    })
+});
+
+let dto = new ol.layer.Vector({
+    visible: false,
+    source: dto111,
+    style: new ol.style.Style({
+        stroke: new ol.style.Stroke({
+            color: 'black',
+            width: 0.5
+        }),
+        fill: new ol.style.Fill({
+            color: 'rgba(0,255,0,0.25)'
+        })
+    })
+});
+let dtoun = new ol.layer.Vector({
+    visible: false,
+    source: dto222,
+    style: new ol.style.Style({
+        stroke: new ol.style.Stroke({
+            color: 'black',
+            width: 0.5
+        }),
+        fill: new ol.style.Fill({
+            color: 'rgba(255,0,0,0.25)'
+        })
+    })
+});
+let trop = new ol.layer.Vector({
+    visible: false,
+    source: trop111,
+    style: new ol.style.Style({
+        stroke: new ol.style.Stroke({
+            color: 'black',
+            width: 0.5
+        }),
+        fill: new ol.style.Fill({
+            color: 'rgba(0,255,0,0.25)'
+        })
+    })
+});
+let tropun = new ol.layer.Vector({
+    visible: false,
+    source: trop222,
+    style: new ol.style.Style({
+        stroke: new ol.style.Stroke({
+            color: 'black',
+            width: 0.5
+        }),
+        fill: new ol.style.Fill({
+            color: 'rgba(255,0,0,0.25)'
+        })
+    })
+});
+let dop = new ol.layer.Vector({
+    visible: false,
+    source: DOP111,
+    style: new ol.style.Style({
+        stroke: new ol.style.Stroke({
+            color: 'black',
+            width: 0.5
+        }),
+        fill: new ol.style.Fill({
+            color: 'rgba(0,255,0,0.25)'
+        })
+    })
+});
+let dopun = new ol.layer.Vector({
+    visible: false,
+    source: DOP222,
+    style: new ol.style.Style({
+        stroke: new ol.style.Stroke({
+            color: 'black',
+            width: 0.5
+        }),
+        fill: new ol.style.Fill({
+            color: 'rgba(255,0,0,0.25)'
+        })
+    })
+});
+let dtr11 = new ol.layer.Vector({
+    visible: false,
+    source: dtr111,
+    style: new ol.style.Style({
+        stroke: new ol.style.Stroke({
+            color: 'black',
+            width: 0.5
+        }),
+        fill: new ol.style.Fill({
+            color: 'rgba(0,255,0, 0.55)'
+        })
+    })
+});
+let dtr22 = new ol.layer.Vector({
+    visible: false,
+    source: dtr222,
+    style: new ol.style.Style({
+        stroke: new ol.style.Stroke({
+            color: 'black',
+            width: 0.5
+        }),
+        fill: new ol.style.Fill({
+            color: 'rgba(255,0,0, 0.5)'
+        })
+    })
+});
+let prD4 = new ol.layer.Vector({
+    visible: false,
+    source: D444,
+
+    style: new ol.style.Style({
+
+        stroke: new ol.style.Stroke({
+            color: 'black',
+            width: 0.5
+        }),
+        fill: new ol.style.Fill({
+            color: 'rgba(77,168,0,0.75)'
+        })
+
+    })
+});
+let prD3 = new ol.layer.Vector({
+    visible: false,
+    source: D333,
+    style: new ol.style.Style({
+        stroke: new ol.style.Stroke({
+            color: 'black',
+            width: 0.5
+        }),
+        fill: new ol.style.Fill({
+            color: 'rgba(168,250,9,0.75)'
+        })
+    })
+});
+let prD2 = new ol.layer.Vector({
+    visible: false,
+    source: D222,
+    style: new ol.style.Style({
+        stroke: new ol.style.Stroke({
+            color: 'black',
+            width: 0.5
+        }),
+        fill: new ol.style.Fill({
+            color: 'rgba(254,251,5,0.75)'
+        })
+    })
+});
+let prD1 = new ol.layer.Vector({
+    visible: false,
+    source: D111,
+    style: new ol.style.Style({
+        stroke: new ol.style.Stroke({
+            color: 'black',
+            width: 0.5
+        }),
+        fill: new ol.style.Fill({
+            color: 'rgba(239,30,3,0.75)'
+        })
+    })
+});
+let tr11 = new ol.layer.Vector({
+    visible: false,
+    source: TR111,
+    style: new ol.style.Style({
+        stroke: new ol.style.Stroke({
+            color: 'black',
+            width: 0.5
+        }),
+        fill: new ol.style.Fill({
+            color: 'rgba(0,255,0,0.5)'
+        })
+    })
+});
+let tr22 = new ol.layer.Vector({
+    visible: false,
+    source: TR222,
+    style: new ol.style.Style({
+        stroke: new ol.style.Stroke({
+            color: 'black',
+            width: 0.5
+        }),
+        fill: new ol.style.Fill({
+            color: 'rgba(255,0,0,0.5)'
+        })
+    })
+});
+let prostrU1 = new ol.layer.Vector({
+    visible: false,
+    source: U1,
+    style: new ol.style.Style({
+        stroke: new ol.style.Stroke({
+            color: 'black',
+            width: 0.5
+        }),
+        fill: new ol.style.Fill({
+            color: 'rgba(0,255,0,0.5)'
+        })
+    })
+});
+let prostrU2 = new ol.layer.Vector({
+    visible: false,
+    source: U2,
+    style: new ol.style.Style({
+        stroke: new ol.style.Stroke({
+            color: 'black',
+            width: 0.5
+        }),
+        fill: new ol.style.Fill({
+            color: 'rgba(255,0,0,0.5)'
+        })
+    })
 });
 
 
@@ -483,7 +943,7 @@ let style12 = new ol.style.Style({
     text: new ol.style.Text({
         font: 'bold 8px "Open Sans", "Arial Unicode MS", "sans-serif"' })
 });
-var style13 = new ol.style.Style({
+let style13 = new ol.style.Style({
     stroke: new ol.style.Stroke({
         color: 'blue',
         width: 2
@@ -542,7 +1002,6 @@ let s3 = new ol.style.Style({
     text: new ol.style.Text({
         font: 'bold 8px "Open Sans", "Arial Unicode MS", "sans-serif"' })
 });
-
 let s4 = new ol.style.Style({
     stroke: new ol.style.Stroke({
         color: 'black',
@@ -825,7 +1284,8 @@ let select = new ol.interaction.Select({
     }
 });
 
-export {dist, tko, tsBuf, dsBuf, mssBuf ,sadi, bolota, mss, nasPunkt, rivers, roads, trainRoad ,trainStation, distWASTE, distWASTEJSONSource, distSource, tkoSource, select};
+export {dist, tko, tsBuf, dsBuf, mssBuf ,sadi, bolota, mss, nasPunkt, rivers, roads, trainRoad ,trainStation, distWASTE, distWASTEJSONSource, distSource, tkoSource, select,
+    dto, dtoun, trop, tropun, dop, dopun, dtr11, dtr22, prD1, prD2, prD3, prD4, tr11, tr22, prostrU1, prostrU2  };
 
 
 
@@ -854,7 +1314,6 @@ export class LayersPanel extends React.Component {
 
     componentDidMount() {
     this.props.f(this.toggleDist);
-
     }
 
     toggleLayer(layer, state) {
@@ -878,7 +1337,6 @@ export class LayersPanel extends React.Component {
                     <label>
                         <input id={"distCh"} type="checkbox" name="isDist" checked={this.state.isDist} onChange={this.toggleLayer(dist, this.state.isDist)}/> <span className="label-text">Районы Республики Башкортостан </span><label
                         className="filtr" onClick={this.props.onFiltr1Click.bind(null, this)}>Фильтр</label><span> </span><label data-tooltip={"Нажать, выбрать полигон"}  style={{backgroundColor:this.props.isGraphOn ? 'aqua' : 'white', display: this.state.isDist ? "block" : "none"}} className="filtr" onClick={this.props.onGraphClick.bind(null, this)}>Графики отходов</label>
-
                     </label>
                 </div>
                 <div className="form-check">

@@ -13,8 +13,8 @@ import Zoom from '@boundlessgeo/sdk/components/Zoom';
 import EditPopup from '@boundlessgeo/sdk/components/EditPopup';
 import DrawFeature from '@boundlessgeo/sdk/components/DrawFeature';
 import FeatureTable from '@boundlessgeo/sdk/components/FeatureTable';
-import enLocaleData from 'react-intl/locale-data/en';
-import enMessages from '@boundlessgeo/sdk/locale/en';
+import enLocaleData from 'react-intl/locale-data/ru';
+import enMessages from './data/ru';
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
 import injectTapEventPlugin from 'react-tap-event-plugin';
 import Button from '@boundlessgeo/sdk/components/Button';
@@ -31,6 +31,9 @@ import {TabQuery} from './modules/TabQuery';
 import {init} from "./modules/geoserverLog";
 import $ from "jquery";
 import {Finder} from "./modules/finder2";
+import {ComputationPanel} from "./modules/ComputationPanel"
+import {dto, dtoun, trop, tropun, dop, dopun, dtr11, dtr22, prD1, prD2, prD3, prD4, tr11, tr22, prostrU1, prostrU2 } from "./modules/LayersPanel";
+
 
 init();
 injectTapEventPlugin();
@@ -52,7 +55,8 @@ let map = new ol.Map({
     new ol.layer.Group({
       title: 'Подключенные слои',
       layers: [
-         dist, tsBuf, dsBuf, mssBuf , tko, mss, sadi, bolota,  nasPunkt, rivers, roads, trainRoad ,trainStation
+         dist, tsBuf, dsBuf, mssBuf , tko, mss, sadi, bolota,  nasPunkt, rivers, roads, trainRoad ,trainStation,
+          dto, dtoun, trop, tropun, dop, dopun, dtr11, dtr22, prD1, prD2, prD3, prD4, tr11, tr22, prostrU1, prostrU2
       ]
     })
   ],
@@ -85,7 +89,6 @@ class WFSTApp extends React.Component {
   this._layerTurn2Click = this._layerTurn2Click.bind(this);
   this._layerTurnClick = this._layerTurnClick.bind(this);
   this._legendTurn = this._legendTurn.bind(this);
-  this._comput = this._comput.bind(this);
   this.callbackOnShow = this.callbackOnShow.bind(this);
   this.callbackOnClear = this.callbackOnClear.bind(this);
   this.tabManager = this.tabManager.bind(this);
@@ -144,12 +147,6 @@ class WFSTApp extends React.Component {
     }));
   }
 
-  _comput(){
-    this.setState(state =>({
-      isComputOn: !state.isComputOn
-    }));
-  }
-
   callbackOnShow() {
     if(!this.state.wasteLayerOn) {
       this.toggleDist();
@@ -174,6 +171,7 @@ class WFSTApp extends React.Component {
 
 
   tabManager(tab){
+    this.setState({isComputOn: false});
     this.setState({isTurnOn: false});
     this.setState({isTurn2On: false});
     this.setState({isGraphOn: false});
@@ -191,11 +189,14 @@ class WFSTApp extends React.Component {
       case 3:
         this.setState({isTurn2On: true});
         break;
+      case 4:
+        this.setState({isComputOn: true});
     }
 }
   hideTabs(){
     this.setState({isTurnOn: false});
     this.setState({isTurn2On: false});
+    this.setState({isComputOn: false});
 
     ReactDOM.findDOMNode(this.refs.tablePanel).style.display = "none";
   }
@@ -230,8 +231,6 @@ class WFSTApp extends React.Component {
             ]);
             let wealth = data.mapAs({'x': 0, 'value': 1});
             let wealth2 = data2.mapAs({'x': 0, 'value': 1});
-
-
             let chart = anychart.pie(wealth);
             chart.labels()
                 .hAlign('center')
@@ -272,6 +271,7 @@ class WFSTApp extends React.Component {
     });
   }
 
+
   render() {
     return (
       <div id='content'>
@@ -305,7 +305,7 @@ class WFSTApp extends React.Component {
             </div>
           </div>
         </div>
-
+        <ComputationPanel state={this.state.isComputOn}/>
         <MapPanel id='map' map={map} />
         <div id='editpopup' className='ol-popup'><EditPopup toggleGroup='nav' map={map} /></div>
         <div  ref='tablePanel' id='table-panel' className='attributes-table'><FeatureTable toggleGroup='navigation' ref='table' map={map} /></div >
@@ -317,6 +317,7 @@ class WFSTApp extends React.Component {
           <button title={"Вернуть начальный вид"} id="home" className={"buttonOff"} onClick={this._homeClick} style={{background:this.state.bgColor}}><i className="fa fa-home"/></button>
           <button title={"Тематические карты"} id="layerTurn2" className={this.state.isTurn2On ? "buttonOn" : "buttonOff"} onClick={this._layerTurn2Click}><i className="fa fa-asterisk"/></button>
           <button title={"Легенда"} id="legendTurn" className={this.state.isLegendOn ? "buttonOn" : "buttonOff"} onClick={this._legendTurn}><i className="fa fa-list-alt"/></button>
+          <button id="comput" className={this.state.isComputOn ? "buttonOn" : "buttonOff"} onClick={() => this.tabManager(4)}><i className="fa fa-link"/></button>
         </div>
         <div id='layerlist'><LayersPanel isGraphOn={this.state.isGraphOn} onGraphClick = {this.onGraphClick} onFiltr1Click = {(component, event) => this.tabManager(1)} onFiltr2Click = {(component, event) => this.tabManager(2)}  f = {(func) => this.toggleDist = func}  className={"panel"} state={this.state.isLayerPanelOn}/><button id="layerPanelButton" className={this.state.isLayerPanelOn ? "buttonOn" : "buttonOff"} onClick={this._isLayerPanel}><i className="fa fa-plus-square-o"></i></button>
         </div>
@@ -327,12 +328,13 @@ class WFSTApp extends React.Component {
     );
   }
 }
-//          <button id="comput" className={this.state.isComputOn ? "buttonOn" : "buttonOff"} onClick={this._comput}><i className="fa fa-link"></i></button>
+
 WFSTApp.childContextTypes = {
   muiTheme: React.PropTypes.object
 };
 
 ReactDOM.render(<IntlProvider locale='en' messages={enMessages}><WFSTApp /></IntlProvider>, document.getElementById('main'));
+
 tko.setVisible(false);
 mss.setVisible(false);
 
