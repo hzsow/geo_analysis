@@ -1,6 +1,8 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import {distSource, tkoSource} from './LayersPanel';
 import ol from "openlayers";
+
 
 
 export class TabQuery extends React.Component {

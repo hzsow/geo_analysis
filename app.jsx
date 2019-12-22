@@ -35,6 +35,11 @@ import {ComputationPanel} from "./modules/ComputationPanel"
 import {dto, dtoun, trop, tropun, dop, dopun, dtr11, dtr22, prD1, prD2, prD3, prD4, tr11, tr22, prostrU1, prostrU2 } from "./modules/LayersPanel";
 
 
+import { connect } from 'react-redux';
+import store from "./store/store"
+import { Provider } from 'react-redux';
+import * as switchActions from "./actions/actions-switch"
+
 init();
 injectTapEventPlugin();
 
@@ -73,17 +78,23 @@ class WFSTApp extends React.Component {
   super(props);
   this.state = {
     colorBn: '#BED3E5',
+
     isLayerPanelOn: true,
     isTurnOn: false,
     isTurnOn2: false,
     isTurn2On: false,
     isMarkerOn: false,
-    isLegendOn: true,
     isComputOn: false,
+
     wasteLayerOn: false,
     isGraphOn: false,
-    legst: "img/legendAll.png"
+    legst: "img/legendAll.png",
+
+    items: store.getState().panelsSwitchState
+
   };
+console.log(this.state);
+
 
   this._isLayerPanel = this._isLayerPanel.bind(this);
   this._layerTurn2Click = this._layerTurn2Click.bind(this);
@@ -97,12 +108,13 @@ class WFSTApp extends React.Component {
 
     map.on("singleclick", (evt) => this.hideTabs());
 
-  }
+ }
   getChildContext() {
     return {
       muiTheme: getMuiTheme()
     };
   }
+
 
   _toggle(el) {
     if (el.style.display === 'block') {
@@ -118,9 +130,12 @@ class WFSTApp extends React.Component {
   }
 
   _isLayerPanel(){
+      /*
   this.setState(state => ({
     isLayerPanelOn: !state.isLayerPanelOn
   }));
+
+       */
   }
 
   _homeClick(){
@@ -129,22 +144,31 @@ class WFSTApp extends React.Component {
   }
 
   _layerTurn2Click(){
+      /*
     if (!this.state.isTurn2On)
       this.tabManager(3);
     else
       this.setState(state => ({isTurn2On: !state.isTurn2On}));
+
+       */
   }
 
   _layerTurnClick(){
+      /*
     this.setState(state =>({
       isTurnOn: !state.isTurnOn
     }));
+
+       */
   }
 
   _legendTurn(){
+      store.dispatch(switchActions.toggleLegend(!this.state.items.isLegendOn));
+      /*
     this.setState(state =>({
       isLegendOn: !state.isLegendOn
     }));
+       */
   }
 
   callbackOnShow() {
@@ -171,6 +195,7 @@ class WFSTApp extends React.Component {
 
 
   tabManager(tab){
+      /*
     this.setState({isComputOn: false});
     this.setState({isTurnOn: false});
     this.setState({isTurn2On: false});
@@ -192,16 +217,22 @@ class WFSTApp extends React.Component {
       case 4:
         this.setState({isComputOn: true});
     }
+
+       */
 }
   hideTabs(){
+      /*
     this.setState({isTurnOn: false});
     this.setState({isTurn2On: false});
     this.setState({isComputOn: false});
 
     ReactDOM.findDOMNode(this.refs.tablePanel).style.display = "none";
+
+       */
   }
 
   onGraphClick(){
+      /*
     $("div#graph").empty();
     this.setState(state => ({isGraphOn: !state.isGraphOn}), () => {
       if (this.state.isGraphOn){
@@ -269,6 +300,8 @@ class WFSTApp extends React.Component {
         map.removeInteraction(select);
       }
     });
+
+       */
   }
 
 
@@ -283,7 +316,6 @@ class WFSTApp extends React.Component {
           <Navigation toggleGroup='nav' secondary={true} />
           <DrawFeature toggleGroup='nav' map={map} />
           <Button toggleGroup='nav' buttonType='Icon' iconClassName='headerIcons ms ms-table' tooltip='Table' onTouchTap={this._toggleTable.bind(this)}/>
-
         </Header>
 
         <div className="modal fade" id="exampleModalScrollable" tabIndex="-1" role="dialog"
@@ -311,7 +343,7 @@ class WFSTApp extends React.Component {
         <div  ref='tablePanel' id='table-panel' className='attributes-table'><FeatureTable toggleGroup='navigation' ref='table' map={map} /></div >
         <LoadingPanel map={map} />
         <div id='popup' className='ol-popup'><InfoPopup toggleGroup='navigation' map={map} /></div>
-        <div id='legend' style={{display: this.state.isLegendOn ? "block" : "none"}}><img id="leg1" src={this.state.legst}/></div>
+        <div id='legend' style={{display: this.state.items.isLegendOn ? "block" : "none"}}><img id="leg1" src={this.state.legst}/></div>
         <div className="toolbar">
           <div id='zoom-buttons'><Zoom map={map} /></div>
           <button title={"Вернуть начальный вид"} id="home" className={"buttonOff"} onClick={this._homeClick} style={{background:this.state.bgColor}}><i className="fa fa-home"/></button>
@@ -328,12 +360,20 @@ class WFSTApp extends React.Component {
     );
   }
 }
+const mapStateToProps = function(store) {
+  return {
+    panels: store.panelsSwitchState
+  };
+};
+
+export default connect()(WFSTApp);
 
 WFSTApp.childContextTypes = {
   muiTheme: React.PropTypes.object
 };
 
-ReactDOM.render(<IntlProvider locale='en' messages={enMessages}><WFSTApp /></IntlProvider>, document.getElementById('main'));
+
+ReactDOM.render(<Provider store={store}><IntlProvider locale='en' messages={enMessages}><WFSTApp/></IntlProvider></Provider>, document.getElementById('main'));
 
 tko.setVisible(false);
 mss.setVisible(false);
