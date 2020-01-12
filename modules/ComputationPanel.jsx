@@ -1,8 +1,9 @@
 import React from 'react';
 import $ from "jquery";
-import {dto, dtoun, trop, tropun, dop, dopun, dtr11, dtr22, prD1, prD2, prD3, prD4, tr11, tr22, prostrU1, prostrU2 } from "./LayersPanel";
+import {dto, dtoun, trop, tropun, dop, dopun, dtr11, dtr22, prD1, prD2, prD3, prD4, tr11, tr22, prostrU1, prostrU2 } from "./Layers";
+import {connect} from "react-redux";
 
-export class ComputationPanel extends React.Component{
+class ComputationPanel extends React.Component{
     constructor(props){
         super(props);
         this.state = {
@@ -15,6 +16,7 @@ export class ComputationPanel extends React.Component{
     }
 
     onComput(){
+
         if(this.state.addTransport && this.state.addDistrict && this.state.addOpt){
             dto.setVisible(true);
             dtoun.setVisible(true);
@@ -80,7 +82,7 @@ export class ComputationPanel extends React.Component{
 
     render() {
         return(
-            <div className="panel2" style={{display: this.props.state ? "block" : "none"}}>
+            <div className="panel2" style={{display: this.props.panels.isComputationPanelOn ? "block" : "none"}}>
                 <div className="form-check">
                     <label>
                         <input id="addDistrict" type="checkbox" defaultChecked={this.state.addDistrict} onChange={() => this.setState(state => ({addDistrict: !state.addDistrict}))} name="check"/><span className="label-text">Анализ состояния муниципальных образований</span>
@@ -96,9 +98,17 @@ export class ComputationPanel extends React.Component{
                         <input id="addOpt" type="checkbox" defaultChecked={this.state.addOpt} name="check" onChange={() => this.setState(state => ({addOpt: !state.addOpt}))}/> <span className="label-text">Учет природно-территориальных условий</span>
                     </label>
                 </div>
-                <button className="knopka" onClick={this.onComput}>Рассчитать</button>
+                <label style={{display: this.props.layers.isComputationLayersAreReady ? "none" : "block"}}><span className="label-text">Ждите...</span></label>
+                <button className="knopka" onClick={this.onComput} disabled={!this.props.layers.isComputationLayersAreReady}>Рассчитать</button>
                 <button className="knopka" onClick={this.onClear}>Убрать</button>
             </div>
         )
     }
 }
+const mapStateToProps = function(store) {
+    return {
+        panels: store.panelsSwitchState,
+        layers: store.layersPanelState
+    };
+};
+export default connect(mapStateToProps)(ComputationPanel);

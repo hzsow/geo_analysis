@@ -18,15 +18,15 @@ export function toggleComputationPanel(st) {
         st
     };
 }
-export function toggleFilterPanelDist(st) {
+export function toggleFilterPanel(st) {
     return {
-        type: types.TOGGLE_FILTER_PANEL_DIST,
+        type: types.TOGGLE_FILTER_PANEL,
         st
     };
 }
-export function toggleFilterPanelTko(st) {
+export function toggleFilterPanelDISTTKO(st) {
     return {
-        type: types.TOGGLE_FILTER_PANEL_TKO,
+        type: types.TOGGLE_FILTER_PANEL_DIST_TKO,
         st
     };
 }
@@ -40,5 +40,20 @@ export function toggleLegend(st) {
     return {
         type: types.TOGGLE_LEGEND,
         st
+    };
+}
+export function toggleOffAll() {
+    return {
+        type: types.TOGGLE_OFF_ALL
+    };
+}
+export function fetchComputationLayers() {
+    return {
+        type: types.GET_COMPUTATION_FETCH
+    };
+}
+export function computationLayersIsDone() {
+    return {
+        type: types.GET_COMPUTATION_DONE
     };
 }

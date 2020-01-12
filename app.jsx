@@ -5,11 +5,11 @@ import {addLocaleData, IntlProvider, defineMessages, injectIntl, intlShape} from
 import enLocaleData from 'react-intl/locale-data/ru';
 import enMessages from './data/ru';
 import injectTapEventPlugin from 'react-tap-event-plugin';
-import {tko, mss} from './modules/LayersPanel';
-import {init} from "./modules/geoserverLog";
+import {tko, mss} from './modules/Layers';
+import {init} from "./modules/GeoserverAccess";
 import store from "./store/store"
 import { Provider } from 'react-redux';
-import App from "./modules/main"
+import App from "./modules"
 
 
 init();

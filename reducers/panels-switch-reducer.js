@@ -4,8 +4,8 @@ const initialState = {
     isLayerPanelOn: true,
     isThematicMapsOn: false,
     isComputationPanelOn: false,
-    isFilterPanelDist: false,
-    isFilterPanelTKO: false,
+    isFilterPanel: false,
+    isFilterPanelDISTTKO: true,
     isGraphPanelOn: false,
     isLegendOn: true
 };
@@ -13,19 +13,21 @@ const initialState = {
 const panelsSwitchReducer = function (state = initialState, action) {
     switch (action.type) {
         case types.TOGGLE_LAYER_PANEL:
-            return Object.assign({}, state, { isLayerPanelOn: action.st });
+            return {...state, isLayerPanelOn: action.st };
         case types.TOGGLE_THEMATIC_MAPS:
-            return Object.assign({}, state, { isThematicMapsOn: action.st });
+            return {...state, isThematicMapsOn: action.st };
         case types.TOGGLE_COMPUTATION_PANEL:
-            return Object.assign({}, state, { isComputationPanelOn: action.st });
-        case types.TOGGLE_FILTER_PANEL_DIST:
-            return Object.assign({}, state, { isFilterPanelDist: action.st });
-        case types.TOGGLE_FILTER_PANEL_TKO:
-            return Object.assign({}, state, { isFilterPanelTKO: action.st });
+            return {...state, isComputationPanelOn: action.st };
+        case types.TOGGLE_FILTER_PANEL:
+            return {...state, isFilterPanel: action.st };
+        case types.TOGGLE_FILTER_PANEL_DIST_TKO:
+            return {...state, isFilterPanelDISTTKO: action.st };
         case types.TOGGLE_GRAPH_PANEL:
-            return Object.assign({}, state, { isGraphPanelOn: action.st });
+            return {...state, isGraphPanelOn: action.st };
         case types.TOGGLE_LEGEND:
-            return Object.assign({}, state, { isLegendOn: action.st });
+            return {...state, isLegendOn: action.st };
+        case types.TOGGLE_OFF_ALL:
+            return {...state, isThematicMapsOn: false, isLegendOn: true, isFilterPanel: false};
         default:
             return state;
     }
