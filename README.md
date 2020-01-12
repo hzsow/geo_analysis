@@ -1,11 +1,14 @@
-# WFS-T Application
+# Analysis of municipal areas of the Republic of Bashkortostan in the field of waste management
 
-[http://boundlessgeo.github.io/sdk-apps/simple](http://boundlessgeo.github.io/sdk-apps/simple)
+# About
 
-WFS-T application shows how to do transactions on a Web Feature Service with Boundless SDK.
+The application is intended for analysis and calculation of optimal zones for the construction of waste recycling stations.
+Uses React, Redux, Redux-Saga.
 
-[http://docs.geoserver.org/latest/en/user/services/wfs/reference.html] (http://docs.geoserver.org/latest/en/user/services/wfs/reference.html)
 
-An OSM streets basemap is provided with a vector layer from the WFS-T outlining state line in the US.
-
-A feature table displays data related to the state features on this layer, as well as the ability to filter by attribute.
+# Usage
+1. Install dependencies: npm install
+2. Run server: npm start
+3. Run Geoserver
+4. Run proxy: npm start:proxy
+5. Go to the page: http://localhost:3978

@@ -22,6 +22,6 @@ export function init(){
             console.log("geoserver ok");
         }
     ).fail(function() {
-        console.log("geoserver fail");
+       alert("Geoserver doesn't work or something goes wrong\nSome functions won't be able to work properly");
     })
 }

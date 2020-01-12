@@ -7,9 +7,6 @@ import * as layers from "../modules/Layers";
 
 function* watchAll() {
     yield all([
-        takeEvery(types.TOGGLE_LEGEND, () => console.log("ептить")),
-        takeEvery(types.TOGGLE_THEMATIC_MAPS, () => console.log("ептить2")),
-
         takeEvery(types.DIST_LAYER, () => layers.dist.setVisible(store.getState().layersPanelState.isDist)),
         takeEvery(types.TKO_LAYER, () => layers.tko.setVisible(store.getState().layersPanelState.isTko)),
         takeEvery(types.SADI_LAYER, () => layers.sadi.setVisible(store.getState().layersPanelState.isSadi)),
