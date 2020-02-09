@@ -13,6 +13,8 @@ class LayersPanel extends React.Component {
 
     onGraphClick(){
         this.props.dispatch(actionsSwitch.toggleGraphPanel(!this.props.panels.isGraphPanelOn));
+        if (this.props.panels.isLegendOn)
+            this.props.dispatch(actionsSwitch.toggleLegend(!this.props.panels.isLegendOn));
     }
 
     onFilter(e){
@@ -31,7 +33,7 @@ class LayersPanel extends React.Component {
                     <label>
                         <input type="checkbox" name="isDist" defaultChecked={this.props.layers.isDist} onChange={() => this.props.dispatch(actions.toggleDist(!this.props.layers.isDist))}/><span className="label-text">Районы Республики Башкортостан </span>
                         <label className="filtr" id="isDist" onClick={this.onFilter}>Фильтр</label>
-                        <label data-tooltip={"Нажать, выбрать полигон"}  onClick={this.onGraphClick} style={{backgroundColor:this.props.panels.isGraphPanelOn ? 'aqua' : 'white', display: this.props.layers.isDist ? "block" : "none"}} className="filtr">Графики отходов</label>
+                        <label data-tooltip={"Нажать, выбрать полигон"}  onClick={this.onGraphClick} style={{display: this.props.layers.isDist ? "inline-block" : "none"}} className={!this.props.panels.isGraphPanelOn ? "filtr" : "filtr-active"}>Графики отходов</label>
                     </label>
                 </div>
                 <div className="form-check">

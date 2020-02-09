@@ -203,7 +203,7 @@ html, body {
   padding: 10px;
   text-align: justify;
   width: 25%;
-  height: 35%;
+  height: 45%;
 }
 
 .selected { display: block; }
@@ -304,13 +304,19 @@ html, body {
 
 .filtr{
   color: rgb(219,58,93);
-  text-decoration: underline
+  text-decoration: underline;
+  margin-right: 2%;
 }
 .filtr:hover {
   color: rgb(240,78,30);
   cursor: pointer;
 }
-
+.filtr-active{
+  color: blue;
+  font-weight: bold;
+  text-decoration: underline;
+  margin-right: 2%;
+}
 .input-group{
   width: 100%;
 }

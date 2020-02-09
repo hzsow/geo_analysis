@@ -72,7 +72,7 @@ class WFSTApp extends React.Component {
     }
 
     _isLayerPanel(){
-        this.props.dispatch(switchActions.toggleLegend(!this.props.panels.isLayerPanelOn));
+        this.props.dispatch(switchActions.toggleLayerPanel(!this.props.panels.isLayerPanelOn));
     }
     _isThematicMap(){
         this.props.dispatch(switchActions.toggleThematicMap(!this.props.panels.isThematicMapsOn));

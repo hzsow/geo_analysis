@@ -210,7 +210,7 @@ let dist = new ol.layer.Vector({
     id: 'wfst',
     wfsInfo: {
         featureNS: 'http://www.opengeospatial.net/cite',
-        attributes: ['NAME', 'AREA', 'Shape_Leng'],
+        attributes: ['NAME', 'AREA', 'Shape_Leng','Othody','Population'],
         featureType: 'dist223',
         featurePrefix: 'cite',
         geometryType: 'MultiPolygon',
@@ -1266,7 +1266,7 @@ select.on('select', function(e) {
         let obrOth2 = selectedFeatures[0].get('W_16');
         let zahOth = selectedFeatures[0].get('W_d_15');
 
-        $("div#graph").empty();
+        $("div#graph").empty().show();
 
         let data = anychart.data.set([
             ['Обезвреженные отходы', obezvOth],
@@ -1310,7 +1310,10 @@ select.on('select', function(e) {
 
 
 let addInteraction = () => map.addInteraction(select);
-let removeInteraction = () => map.removeInteraction(select);
+let removeInteraction = () => {
+    map.removeInteraction(select);
+    $("div#graph").empty().hide();
+};
 
 export {dist, tko, tsBuf, dsBuf, mssBuf ,sadi, bolota, mss, nasPunkt, rivers, roads, trainRoad ,trainStation, distWASTE, distWASTEJSONSource, distSource, tkoSource, style13, map, addInteraction, removeInteraction,
     dto, dtoun, trop, tropun, dop, dopun, dtr11, dtr22, prD1, prD2, prD3, prD4, tr11, tr22, prostrU1, prostrU2, getComputationLayers};

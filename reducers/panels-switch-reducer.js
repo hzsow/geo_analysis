@@ -27,7 +27,7 @@ const panelsSwitchReducer = function (state = initialState, action) {
         case types.TOGGLE_LEGEND:
             return {...state, isLegendOn: action.st };
         case types.TOGGLE_OFF_ALL:
-            return {...state, isThematicMapsOn: false, isLegendOn: true, isFilterPanel: false};
+            return {...state, isThematicMapsOn: false, isFilterPanel: false, isComputationPanelOn: false};
         default:
             return state;
     }
