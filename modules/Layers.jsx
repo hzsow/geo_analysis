@@ -220,14 +220,16 @@ let dist = new ol.layer.Vector({
     isWFST: true,
     title: 'Районы РБ',
 
-    style: (feature) =>  {
+    style: (feature, resolution) =>  {
+        if (resolution < 2400)
         style12.getText().setText(feature.get('Name2'));
+        else style12.getText().setText('');
         return style12;
     }
 });
 let distWASTE = new ol.layer.Vector({
     isWFST: false,
-    visible: true,
+    visible: false,
     id: 'waste',
     source: distWASTEJSONSource,
     style: chStyle
@@ -485,7 +487,7 @@ let map = new ol.Map({
         new ol.layer.Group({
             title: 'Подключенные слои',
             layers: [
-                dist, tsBuf, dsBuf, mssBuf , tko, mss, sadi, bolota,  nasPunkt, rivers, roads, trainRoad ,trainStation
+                dist, distWASTE, tsBuf, dsBuf, mssBuf , tko, mss, sadi, bolota,  nasPunkt, rivers, roads, trainRoad ,trainStation
             ]
         })
     ],
@@ -903,7 +905,6 @@ export function getComputationLayers(){
 
 }
 
-
 let style12 = new ol.style.Style({
     stroke: new ol.style.Stroke({
         color: 'black',
@@ -913,7 +914,11 @@ let style12 = new ol.style.Style({
         color: 'rgba(255,102,255,0.5) '
     }),
     text: new ol.style.Text({
-        font: 'bold 8px "Open Sans", "Arial Unicode MS", "sans-serif"' })
+        font: 'bold 10px "Open Sans", "Arial Unicode MS", "sans-serif"'
+    }),
+    zIndex: 100,
+    overflow: true,
+    maxAngle: Infinity
 });
 let style13 = new ol.style.Style({
     stroke: new ol.style.Stroke({

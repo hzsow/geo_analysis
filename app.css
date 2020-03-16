@@ -132,9 +132,9 @@ html, body {
 }
 .toolbar button{
   display: block;
-  margin: 30%;
-  width: 45px;
-  height: 45px;
+  margin: 30% 25%;
+  width: 40px;
+  height: 40px;
   border-radius: 50%;
   font-size: 24px;
   border:  1px solid #ddd;
@@ -287,8 +287,8 @@ html, body {
 
 #legend{
   display: none;
-  width: 17.5%;
-
+  width: 16%;
+  min-width: 270px;
   position: absolute;
   z-index: 6;
   left: 7%;

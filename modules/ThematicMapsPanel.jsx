@@ -23,19 +23,17 @@ class ThematicMapsPanel extends React.Component {
         console.log(this.state.selectOneValue.concat(this.state.selectTwoValue));
 
         if(!this.state.wasteLayerOn) {
-            map.addLayer(distWASTE);
+            distWASTE.setVisible(true);
             this.setState(state =>({wasteLayerOn: !this.state.wasteLayerOn}));
         }
         else{
-            map.removeLayer(distWASTE);
-            map.addLayer(distWASTE);
             distWASTEJSONSource.changed();
         }
     }
 
     onClear() {
         if(this.state.wasteLayerOn) {
-            map.removeLayer(distWASTE);
+            distWASTE.setVisible(false);
             this.setState(state =>({wasteLayerOn: !this.state.wasteLayerOn}));
             $("#leg1").attr("src", "img/legendAll.png");
         }
