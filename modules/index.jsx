@@ -24,7 +24,7 @@ import FilterPanel from "./FilterPanel";
 import {map} from "./Layers";
 import {connect} from "react-redux";
 import Modal from "./modal";
-
+import InfoModal from "./infoModal";
 
 
 class WFSTApp extends React.Component {
@@ -32,13 +32,15 @@ class WFSTApp extends React.Component {
         super(props);
         this.state = {
             isGraphOn: false,
-            isLoading: false
+            isLoading: false,
+            isModalShow: true
         };
 
         this._isLayerPanel = this._isLayerPanel.bind(this);
         this._legendTurn = this._legendTurn.bind(this);
         this._isThematicMap = this._isThematicMap.bind(this);
         this._computationTurn = this._computationTurn.bind(this);
+        this._onCloseModal = this._onCloseModal.bind(this);
 
         map.on("singleclick", (evt) => {
             this.props.dispatch(switchActions.toggleOffAll());
@@ -89,6 +91,9 @@ class WFSTApp extends React.Component {
         });
     }
 
+    _onCloseModal(){
+        this.setState({isModalShow: false});
+    }
     render() {
         return (
             <div id='content'>
@@ -101,7 +106,8 @@ class WFSTApp extends React.Component {
                     <DrawFeature toggleGroup='nav' map={map} />
                     <Button toggleGroup='nav' buttonType='Icon' iconClassName='headerIcons ms ms-table' tooltip='Table' onTouchTap={this._toggleTable.bind(this)}/>
                 </Header>
-
+                
+                {this.state.isModalShow && <InfoModal onClose={this._onCloseModal}/>}
                 <Modal/>
                 <ComputationPanel/>
                 <MapPanel id='map' map={map} />
