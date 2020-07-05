@@ -9,6 +9,7 @@ class LayersPanel extends React.Component {
         super(props);
         this.onFilter = this.onFilter.bind(this);
         this.onGraphClick = this.onGraphClick.bind(this);
+        this.onForecastClick = this.onForecastClick.bind(this);
     }
 
     onGraphClick(){
@@ -16,7 +17,11 @@ class LayersPanel extends React.Component {
         if (this.props.panels.isLegendOn)
             this.props.dispatch(actionsSwitch.toggleLegend(!this.props.panels.isLegendOn));
     }
-
+    onForecastClick(){
+        this.props.dispatch(actionsSwitch.toggleForecastPanel(!this.props.panels.isForecastPanelOn));
+        if (this.props.panels.isLegendOn)
+            this.props.dispatch(actionsSwitch.toggleLegend(!this.props.panels.isLegendOn));
+    }
     onFilter(e){
         if (!this.props.panels.isFilterPanel){
             this.props.dispatch(actionsSwitch.toggleFilterPanel(true));
@@ -33,7 +38,8 @@ class LayersPanel extends React.Component {
                     <label>
                         <input type="checkbox" name="isDist" defaultChecked={this.props.layers.isDist} onChange={() => this.props.dispatch(actions.toggleDist(!this.props.layers.isDist))}/><span className="label-text">Районы Республики Башкортостан </span>
                         <label className="filtr" id="isDist" onClick={this.onFilter}>Фильтр</label>
-                        <label data-tooltip={"Нажать, выбрать полигон"}  onClick={this.onGraphClick} style={{display: this.props.layers.isDist ? "inline-block" : "none"}} className={!this.props.panels.isGraphPanelOn ? "filtr" : "filtr-active"}>Графики отходов</label>
+                        <label data-tooltip="Нажать, выбрать полигон" onClick={this.onGraphClick} style={{display: this.props.layers.isDist ? "inline-block" : "none"}} className={!this.props.panels.isGraphPanelOn ? "filtr" : "filtr-active"}>Графики отходов</label>
+                        <label data-tooltip="Нажать, выбрать полигон" onClick={this.onForecastClick} style={{display: this.props.layers.isDist ? "inline-block" : "none"}} className={!this.props.panels.isGraphPanelOn ? "filtr" : "filtr-active"}>Прогноз</label>
                     </label>
                 </div>
                 <div className="form-check">

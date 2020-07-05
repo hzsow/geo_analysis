@@ -7,6 +7,7 @@ const initialState = {
     isFilterPanel: false,
     isFilterPanelDISTTKO: true,
     isGraphPanelOn: false,
+    isForecastPanelOn: false,
     isLegendOn: true
 };
 
@@ -24,10 +25,12 @@ const panelsSwitchReducer = function (state = initialState, action) {
             return {...state, isFilterPanelDISTTKO: action.st };
         case types.TOGGLE_GRAPH_PANEL:
             return {...state, isGraphPanelOn: action.st };
+        case types.TOGGLE_FORECAST_PANEL:
+            return {...state, isForecastPanelOn: action.st };
         case types.TOGGLE_LEGEND:
             return {...state, isLegendOn: action.st };
         case types.TOGGLE_OFF_ALL:
-            return {...state, isThematicMapsOn: false, isFilterPanel: false, isComputationPanelOn: false};
+            return {...state, isThematicMapsOn: false, isFilterPanel: false, isComputationPanelOn: false, isForecastPanelOn: false};
         default:
             return state;
     }

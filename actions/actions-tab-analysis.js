@@ -18,3 +18,9 @@ export function query(queryValue) {
         queryValue
     };
 }
+export function selectForecast(payload) {
+    return {
+        type: types.SELECT_FORECAST,
+        payload
+    };
+}

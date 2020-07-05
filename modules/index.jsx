@@ -20,6 +20,7 @@ import LoadingPanel from "@boundlessgeo/sdk/components/LoadingPanel";
 import InfoPopup from "@boundlessgeo/sdk/components/InfoPopup";
 import Zoom from "@boundlessgeo/sdk/components/Zoom";
 import ThematicMapsPanel from "./ThematicMapsPanel";
+import ForecastPanel from "./ForecastPanel";
 import FilterPanel from "./FilterPanel";
 import {map} from "./Layers";
 import {connect} from "react-redux";
@@ -106,7 +107,6 @@ class WFSTApp extends React.Component {
                     <DrawFeature toggleGroup='nav' map={map} />
                     <Button toggleGroup='nav' buttonType='Icon' iconClassName='headerIcons ms ms-table' tooltip='Table' onTouchTap={this._toggleTable.bind(this)}/>
                 </Header>
-                
                 {this.state.isModalShow && <InfoModal onClose={this._onCloseModal}/>}
                 <Modal/>
                 <ComputationPanel/>
@@ -114,6 +114,7 @@ class WFSTApp extends React.Component {
                 <ThematicMapsPanel/>
                 <FilterPanel/>
                 <LoadingPanel map={map}/>
+                {this.props.panels.isForecastPanelOn && <ForecastPanel />}
                 <div id='layerlist'><LayersPanel className={"panel"}/><button id="layerPanelButton" className={this.props.panels.isLayerPanelOn ? "buttonOn" : "buttonOff"} onClick={this._isLayerPanel}><i className="fa fa-plus-square-o"/></button></div>
 
 
@@ -121,7 +122,7 @@ class WFSTApp extends React.Component {
                 <div  ref='tablePanel' id='table-panel' className='attributes-table'><FeatureTable toggleGroup='navigation' ref='table' map={map} /></div>
                 <div id='popup' className='ol-popup'><InfoPopup toggleGroup='navigation' map={map} /></div>
                 <div id='legend' style={{display: this.props.panels.isLegendOn ? "block" : "none"}}><img id="leg1" src={"img/legendAll.png"} alt={""}/></div>
-                <div style={{display: this.state.isGraphOn ? "block" : "none"}}  id={"graph"}/>
+                <div style={{display: this.state.isGraphOn ? "block" : "none"}}  id="graph"/>
 
 
                 <div className="toolbar">

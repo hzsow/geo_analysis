@@ -21,6 +21,9 @@ function* watchAll() {
         takeEvery(types.DS_BUF_STATION_LAYER, () => layers.dsBuf.setVisible(store.getState().layersPanelState.isDsBuf)),
         takeEvery(types.MSS_BUF_STATION_LAYER, () => layers.mssBuf.setVisible(store.getState().layersPanelState.isMssBuf)),
         takeEvery(types.TOGGLE_GRAPH_PANEL, () => store.getState().panelsSwitchState.isGraphPanelOn ? layers.addInteraction() : layers.removeInteraction()),
+        takeEvery(types.SELECT_FORECAST, () => {
+            layers.removeInteractionForecast().addInteractionForecast();
+        }),
         takeEvery(types.GET_COMPUTATION_FETCH, () => layers.getComputationLayers())
     ]);
 }

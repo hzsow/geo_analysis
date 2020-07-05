@@ -36,6 +36,12 @@ export function toggleGraphPanel(st) {
         st
     };
 }
+export function toggleForecastPanel(st) {
+    return {
+        type: types.TOGGLE_FORECAST_PANEL,
+        st
+    };
+}
 export function toggleLegend(st) {
     return {
         type: types.TOGGLE_LEGEND,

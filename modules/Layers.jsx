@@ -1312,11 +1312,90 @@ select.on('select', function(e) {
         chart2.draw();
     }
 });
+let select2 = new ol.interaction.Select({
+    layers: [dist],
+    style: feature => {
+        style13.getText().setText(feature.get('Name2'));
+        return style13;
+    }
+});
+
+select2.on('select', function(e) {
+    let selectedFeatures = e.target.getFeatures().getArray();
+    if (selectedFeatures.length !== 0) {
+        let name = selectedFeatures[0].get('NAME');
+        
+        const selectedForecast = store.getState().tabAnalysisState.selectedForecast;
+        
+        console.log('inside select2', selectedForecast)
+
+        $("div#graph").empty().show();
+
+
+        var chart = anychart.column();
+
+        chart.animation(true);
+
+        chart.title('Расчетный прогноз ТКО предприятий');
+        // chart.title('Расчетный прогноз ТКО домохозяйств');
+        // chart.title('Суммарный расчёт ТКО');
+
+        var series = chart.column([
+            ['2018', selectedFeatures[0].get(`${selectedForecast}_18`)],
+            ['2019', selectedFeatures[0].get(`${selectedForecast}_19`)],
+            ['2020', selectedFeatures[0].get(`${selectedForecast}_20`)],
+            ['2021', selectedFeatures[0].get(`${selectedForecast}_21`)],
+            ['2022', selectedFeatures[0].get(`${selectedForecast}_22`)],
+            ['2023', selectedFeatures[0].get(`${selectedForecast}_23`)],
+            ['2024', selectedFeatures[0].get(`${selectedForecast}_24`)],
+            ['2025', selectedFeatures[0].get(`${selectedForecast}_25`)],
+            ['2026', selectedFeatures[0].get(`${selectedForecast}_26`)]
+            ['2027', selectedFeatures[0].get(`${selectedForecast}_27`)]
+            ['2028', selectedFeatures[0].get(`${selectedForecast}_28`)]
+        ]);
+
+        // set series tooltip settings
+        series.tooltip().titleFormat('{%X}');
+
+        series
+            .tooltip()
+            .position('center-top')
+            .anchor('center-bottom')
+            .offsetX(0)
+            .offsetY(5)
+            .format('${%Value}{groupsSeparator: }');
+
+        // set scale minimum
+        chart.yScale().minimum(0);
+
+        // set yAxis labels formatter
+        chart.yAxis().labels().format('${%Value}{groupsSeparator: }');
+
+        // tooltips position and interactivity settings
+        chart.tooltip().positionMode('point');
+        chart.interactivity().hoverMode('by-x');
+
+        // axes titles
+        chart.xAxis().title('Год');
+        chart.yAxis().title('Кол-во отходов');
+
+        // set container id for the chart
+        chart.container('graph');
+
+        // initiate chart drawing
+        chart.draw();
+    }
+});
 
 
 let addInteraction = () => map.addInteraction(select);
+export const addInteractionForecast = () => map.addInteraction(select2);
 let removeInteraction = () => {
     map.removeInteraction(select);
+    $("div#graph").empty().hide();
+};
+export const removeInteractionForecast = () => {
+    map.removeInteraction(select2);
     $("div#graph").empty().hide();
 };
 
